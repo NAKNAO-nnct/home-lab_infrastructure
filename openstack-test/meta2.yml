@@ -1,0 +1,20 @@
+instance-id: openstackwoker2
+local-hostname: openstackworker2
+
+
+network:
+  version: 2
+  ethernets:
+    ens32:
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses: [192.168.1.1]
+      dhcp4: yes
+      dhcp6: yes
+    ens33:
+      gateway4: 172.16.0.1
+      nameservers:
+        addresses: [172.16.0.1]
+      dhcp4: yes
+      dhcp6: no
+
