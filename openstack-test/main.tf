@@ -9,18 +9,6 @@ locals {
   guest_num_vcpu  = 4
   guest_memory_gb = 4
   guest_disk_gb   = 30
-
-  vm_network_controller = [
-    {
-      virtual_network = "VM Network"
-    },
-    {
-      virtual_network = "openstack-manegment"
-    },
-    {
-      virtual_network = "openstack-internal"
-    }
-  ]
 }
 
 resource "esxi_guest" "openstackcontroller" {
