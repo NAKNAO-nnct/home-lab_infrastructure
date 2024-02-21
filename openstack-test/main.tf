@@ -5,10 +5,22 @@ provider "esxi" {
 }
 
 locals {
-  ovf_source      = "jammy-server-cloudimg-amd64.ova"
+  ovf_source      = "https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64.ova"
   guest_num_vcpu  = 4
   guest_memory_gb = 4
   guest_disk_gb   = 30
+
+  vm_network_controller = [
+    {
+      virtual_network = "VM Network"
+    },
+    {
+      virtual_network = "openstack-manegment"
+    },
+    {
+      virtual_network = "openstack-internal"
+    }
+  ]
 }
 
 resource "esxi_guest" "openstackcontroller" {
@@ -26,8 +38,17 @@ resource "esxi_guest" "openstackcontroller" {
   memsize        = max(local.guest_memory_gb * 1024, 512)
   disk_store     = "WD_HDD_2000_datastore"
   boot_disk_size = max(local.guest_disk_gb, 20)
+  
   network_interfaces {
-    virtual_network = "VM Network"
+      virtual_network = "VM Network"
+  }
+
+  network_interfaces {
+      virtual_network = "openstack-manegment"
+  }
+
+  network_interfaces {
+    virtual_network = "openstack-internal"
   }
 
   guestinfo = {
