@@ -5,10 +5,10 @@ provider "esxi" {
 }
 
 locals {
-  ovf_source       = "jammy-server-cloudimg-amd64.ova"
-  guest_num_vcpu   = 4
-  guest_memory_gb  = 4
-  guest_disk_gb    = 30
+  ovf_source      = "jammy-server-cloudimg-amd64.ova"
+  guest_num_vcpu  = 4
+  guest_memory_gb = 4
+  guest_disk_gb   = 30
 }
 
 resource "esxi_guest" "openstackcontroller" {

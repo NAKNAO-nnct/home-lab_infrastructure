@@ -5,7 +5,7 @@ terraform {
       source = "registry.terraform.io/josenk/esxi"
     }
     ct = {
-      source = "poseidon/ct"
+      source  = "poseidon/ct"
       version = "0.12.0"
     }
   }

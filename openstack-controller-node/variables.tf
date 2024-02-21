@@ -6,5 +6,5 @@ variable "esxi_username" {
   default = "root"
 }
 
-variable esxi_password {
+variable "esxi_password" {
 }
