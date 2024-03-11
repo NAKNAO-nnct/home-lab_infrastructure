@@ -1,0 +1,15 @@
+instance-id: penpot
+local-hostname: penpot.misosiru.uk
+
+
+network:
+  version: 2
+  ethernets:
+    ens32:
+      addresses: [192.168.1.124/24]
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses: [192.168.1.1]
+      dhcp4: no
+      dhcp6: yes
+

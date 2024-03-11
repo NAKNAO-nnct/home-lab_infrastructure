@@ -1,0 +1,35 @@
+#cloud-config
+users:
+  - name: ec2-user
+    plain_text_passwd: "PassWord12345!"
+    ssh_import_id: gh:NAKNAO-nnct
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIFDi+NS1R4fDox0FmkppR3ZODD0erWjtOHVcn0zNLDy+ trompot@step
+    shell: "/bin/bash"
+    sudo: "ALL=(ALL) NOPASSWD:ALL"
+    lock_passwd: false
+
+timezone: Asia/Tokyo
+locale: ja_JP.utf8
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - tmux
+  - vim
+  - git
+  - ca-certificates
+  - curl
+
+runcmd:
+  - "apt -y update && apt -y upgrade && apt -y autoremove"
+  - "apt -y install tmux vim git ca-certificates curl"
+  - "sudo install -m 0755 -d /etc/apt/keyrings"
+  - "sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc"
+  - "sudo chmod a+r /etc/apt/keyrings/docker.asc"
+  - 'echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null'
+  - "apt -y update"
+  - "apt -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin"
+  - "systemctl enable docker"
+  # - 'reboot'
